@@ -221,6 +221,7 @@ public class HttpBindServlet extends HttpServlet {
             if (JiveGlobals.getBooleanProperty("log.httpbind.enabled", false)) {
                 Log.info(new Date() + ": HTTP RECV(" + connection.getSession().getStreamID().getID() + "): " + rootNode.asXML());
             }
+            HttpBindServletLifecycleHooks.postSessionCreated(context, connection.getSession());
         }
         catch (UnauthorizedException | HttpBindException e) {
             // Server wasn't initialized yet.
